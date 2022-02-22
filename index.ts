@@ -32,17 +32,13 @@ app.get('/museums/:id', (req, res) => {
     const id = req.params.id
     const result = getMuseumById.get(id)
 
-    const workResult = getWorkById.get(id)
+    const workResult = getWorkById.all(id)
 
-    result.work = workResult
+    result.works = workResult
 
     console.log(result)
     res.send(result)
 })
-
-app.listen(PORT, () => {
-    console.log(`Server running on: http://localhost:${PORT}`);
-});
 
 app.get('/works', (req, res) => {
     const works = getAllWorks.all()
@@ -98,3 +94,7 @@ app.post('/works', (req, res) => {
         res.send(newWork)
     } else res.status(400).send({ errors: errors })
 })
+
+app.listen(PORT, () => {
+    console.log(`Server running on: http://localhost:${PORT}`);
+});
